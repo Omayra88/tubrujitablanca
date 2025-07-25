@@ -1,102 +1,91 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tu Bruja Blanca Personal</title>
   <style>
     body {
-      background: linear-gradient(180deg, #a86175 0%, #602f47 100%);
+      background: linear-gradient(180deg, #a55c7b 0%, #6e3f5b 100%);
       font-family: 'Georgia', serif;
       margin: 0;
       padding: 0;
       color: #ffffff;
+      animation: fadeIn 2s ease-in;
+      overflow-x: hidden;
     }
-
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
     .container {
       max-width: 800px;
       margin: 0 auto;
       padding: 2rem;
       text-align: center;
+      position: relative;
+      z-index: 2;
     }
-
-    h1, h2, h3, p {
+    h1, h2, h3, p, ul {
       color: #ffffff;
     }
-
+    .section {
+      margin-bottom: 2.5rem;
+      animation: slideUp 1.5s ease-out;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
     .price {
-      font-size: 1.8rem;
+      font-size: 2rem;
       color: #d4af37;
       font-weight: bold;
-      margin: 0.5rem 0;
     }
-
     .button {
       display: inline-block;
-      padding: 0.8rem 1.5rem;
-      margin-top: 1rem;
+      padding: 1rem 2rem;
       background-color: #d4af37;
       color: white;
       text-decoration: none;
       border-radius: 8px;
       font-weight: bold;
       transition: background-color 0.3s ease;
+      margin: 0.5rem;
     }
-
     .button:hover {
       background-color: #bfa335;
     }
-
     .bonus {
       background-color: rgba(255, 255, 255, 0.05);
       padding: 1rem;
       border-left: 5px solid #d4af37;
       border-radius: 10px;
-      margin-top: 2rem;
     }
-
     footer {
       margin-top: 4rem;
       font-size: 0.9rem;
       text-align: center;
       color: #fce7e7;
     }
-
     .image-banner {
       width: 100%;
       border-radius: 16px;
       margin-bottom: 2rem;
       box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
     }
-
-    .section {
-      margin-top: 2.5rem;
-    }
-
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .plan-box {
-      background-color: rgba(255,255,255,0.05);
-      padding: 1.5rem;
-      border-radius: 12px;
-      margin-bottom: 2rem;
-      border: 1px solid #d4af37;
-    }
   </style>
 </head>
 <body>
   <div class="container">
-    <img class="image-banner" src="brujita.png" alt="Tu bruja blanca personal">
+    <img class="image-banner" src="ChatGPT%20Image%2024%20jul%202025%2C%2013_45_40.png" alt="Tu bruja blanca personal">
 
     <h1>Tu Bruja Blanca Personal</h1>
-    <p>Guía espiritual, tarot, energía y sabiduría ancestral. Accede a tu oráculo digital 24/7.</p>
+    <p>Una guía digital para conectar con lo invisible, equilibrar tu energía y despertar tu poder interior. Tarot, canalización, rituales y sabiduría antigua al alcance de tu alma.</p>
 
     <div class="section">
       <h2>¿Qué recibirás?</h2>
-      <ul>
+      <ul style="list-style: none; padding: 0;">
         <li>→ Tarot interpretativo intuitivo</li>
         <li>→ Rituales personalizados</li>
         <li>→ Canalizaciones, afirmaciones, energía akáshica</li>
@@ -105,23 +94,28 @@
       </ul>
     </div>
 
-    <div class="bonus">
+    <div class="section bonus">
       <h3>BONUS: Tu Coach Interior</h3>
       <p>Un GPT de apoyo psicológico para mejorar hábitos y emociones del día a día.</p>
     </div>
 
     <div class="section">
-      <h2>Opciones de Acceso</h2>
+      <h2><span class="price">14,90€/mes</span></h2>
+      <p>Sin permanencia. Cancela cuando quieras. Además, si recomiendas a otras personas...</p>
+      <p><strong>💸 Te llevas 5 € por cada persona que se suscriba desde tu enlace</strong></p>
+      <a class="button" href="https://tuenlace.com/mensual">ACCESO MENSUAL</a>
+    </div>
 
-      <div class="plan-box">
-        <h3>Suscripción mensual</h3>
-        <p class="price">14,90 €/mes</p>
-        <p>Sin permanencia. Cancela cuando quieras.</p>
-        <p><strong>💸 Te llevas 5 € por cada persona que se suscriba desde tu enlace</strong></p>
-        <a class="button" href="#">ACCESO MENSUAL</a>
-      </div>
+    <div class="section">
+      <h2><span class="price">39,90€ pago único</span></h2>
+      <p>Acceso vitalicio a la versión actual del GPT. Sin mensualidades. Ideal si no quieres preocuparte por pagos recurrentes.</p>
+      <a class="button" href="https://tuenlace.com/unico">COMPRA ÚNICA</a>
+    </div>
 
-      <div class="plan-box">
-        <h3>Compra única</h3>
-        <p class="price">39,90 €</p>
-        <p>Paga una vez
+    <footer>
+      © 2025 Tu Bruja Blanca Personal – Conectando almas con magia y tecnología ✨<br>
+      "Lo que parece simple, sostiene algo grande."
+    </footer>
+  </div>
+</body>
+</html>
