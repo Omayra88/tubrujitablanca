@@ -48,19 +48,21 @@
       background-color: #d4af37;
       color: white;
       text-decoration: none;
-      border-radius: 8px;
+      border-radius: 10px;
       font-weight: bold;
-      transition: background-color 0.3s ease;
-      margin: 0.5rem;
+      border-left: 5px solid #d4af37;
+      margin: 1rem auto;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
     }
     .button:hover {
       background-color: #bfa335;
+      transform: translateY(-2px);
     }
     .bonus {
       background-color: rgba(255, 255, 255, 0.05);
       padding: 1rem;
       border-left: 5px solid #d4af37;
-      border-right: 5px solid #d4af37;
       border-radius: 10px;
     }
     footer {
@@ -70,7 +72,7 @@
       color: #fce7e7;
     }
     .image-banner {
-      width: 100%;
+      width: 33%;
       border-radius: 16px;
       margin-bottom: 2rem;
       box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
@@ -79,6 +81,7 @@
 </head>
 <body>
   <div class="container">
+    <!-- Imagen principal -->
     <img class="image-banner" src="bruja.png" alt="Tu bruja blanca personal">
 
     <h1>Tu Bruja Blanca Personal</h1>
@@ -95,11 +98,13 @@
       </ul>
     </div>
 
+    <!-- Botón central grande bonus -->
     <div class="section bonus">
       <h3>BONUS: Tu Coach Interior</h3>
       <p>Un GPT de apoyo psicológico para mejorar hábitos y emociones del día a día.</p>
     </div>
 
+    <!-- Boton compra mensual -->
     <div class="section">
       <h2><span class="price">14,90€/mes</span></h2>
       <p>Sin permanencia. Cancela cuando quieras. Además, si recomiendas a otras personas...</p>
@@ -107,6 +112,7 @@
       <a class="button" href="https://tuenlace.com/mensual">ACCESO MENSUAL</a>
     </div>
 
+    <!-- Boton compra vitalicia -->
     <div class="section">
       <h2><span class="price">39,90€ pago único</span></h2>
       <p>Acceso vitalicio. Sin mensualidades.</p>
