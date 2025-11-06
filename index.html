@@ -1,134 +1,219 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Tu Bruja Blanca Personal</title>
   <style>
-    body {
-      background: linear-gradient(180deg, #a55c7b 0%, #6e3f5b 100%);
-      font-family: 'Georgia', serif;
-      margin: 0;
-      padding: 0;
-      color: #ffffff;
-      animation: fadeIn 2s ease-in;
-      overflow-x: hidden;
+    /* ----------- PALETA ----------- */
+    :root{
+      --night-1:#0d1b2a;   /* azul noche profundo */
+      --night-2:#1b263b;   /* azul noche medio   */
+      --ivory:#f8f6f0;     /* blanco marfil      */
+      --gold:#d4b26a;      /* dorado cálido      */
+      --gold-2:#c49c52;    /* hover dorado       */
     }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+
+    /* ----------- RESETEO BÁSICO ----------- */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      color:var(--ivory);
+      font-family:'Georgia', serif;
+      overflow-x:hidden;
+      animation:fadeIn 1.6s ease-in both;
     }
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 2rem;
-      text-align: center;
-      position: relative;
-      z-index: 2;
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+    /* ----------- FONDO CAPAS ----------- */
+    .bg{
+      position:fixed; inset:0; z-index:0; pointer-events:none;
+      /* Capa base: degradado noche */
+      background:
+        radial-gradient(1200px 800px at 80% 10%, rgba(212,178,106,0.15), transparent 60%),
+        radial-gradient(900px 600px at 15% 85%, rgba(212,178,106,0.10), transparent 65%),
+        linear-gradient(180deg, var(--night-2) 0%, var(--night-1) 100%);
     }
-    h1, h2, h3, p, ul {
-      color: #ffffff;
+    /* Capa estrellas sutiles */
+    .stars, .stars::after{
+      content:""; position:fixed; inset:0; z-index:1; pointer-events:none;
+      background-image:
+        radial-gradient(2px 2px at 10% 20%, rgba(255,255,255,0.35) 50%, transparent 51%),
+        radial-gradient(1.5px 1.5px at 30% 70%, rgba(255,255,255,0.25) 50%, transparent 51%),
+        radial-gradient(1.8px 1.8px at 60% 40%, rgba(255,255,255,0.28) 50%, transparent 51%),
+        radial-gradient(1.2px 1.2px at 85% 25%, rgba(255,255,255,0.22) 50%, transparent 51%),
+        radial-gradient(1.6px 1.6px at 75% 80%, rgba(255,255,255,0.22) 50%, transparent 51%),
+        radial-gradient(1.4px 1.4px at 45% 15%, rgba(255,255,255,0.20) 50%, transparent 51%),
+        radial-gradient(1.2px 1.2px at 55% 90%, rgba(255,255,255,0.18) 50%, transparent 51%);
+      background-repeat:no-repeat;
+      animation: drift 60s linear infinite;
     }
-    .section {
-      margin-bottom: 2.5rem;
-      animation: slideUp 1.5s ease-out;
+    .stars::after{ animation-duration: 95s; opacity:.7; filter:blur(0.3px) }
+
+    /* Capa neblina/halo dorado animado muy sutil */
+    .glow{
+      position:fixed; inset:-10%; z-index:1; pointer-events:none;
+      background:
+        radial-gradient(800px 800px at 80% 12%, rgba(212,178,106,0.18), transparent 65%),
+        radial-gradient(700px 700px at 18% 88%, rgba(212,178,106,0.12), transparent 70%);
+      mix-blend-mode:screen;
+      animation: breathe 14s ease-in-out infinite;
     }
-    @keyframes slideUp {
-      from { transform: translateY(20px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+
+    @keyframes drift{
+      0%{ transform:translate3d(0,0,0) }
+      50%{ transform:translate3d(-1.2%, -0.8%, 0) }
+      100%{ transform:translate3d(0,0,0) }
     }
-    .price {
-      font-size: 2rem;
-      color: #d4af37;
-      font-weight: bold;
+    @keyframes breathe{
+      0%,100%{ filter:blur(0.6px); opacity:.75; transform:scale(1)}
+      50%{ filter:blur(1.1px); opacity:.9; transform:scale(1.02)}
     }
-    .button {
-      display: inline-block;
-      padding: 1rem 2rem;
-      background-color: #d4af37;
-      color: white;
-      text-decoration: none;
-      border-radius: 10px;
-      font-weight: bold;
-      border-left: 5px solid #d4af37;
-      border-right: 5px solid #d4af37;
-      margin: 1rem auto;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-      box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+
+    /* ----------- CONTENIDO ----------- */
+    .container{
+      position:relative; z-index:2;
+      max-width:820px; margin:0 auto; padding:2rem; text-align:center;
     }
-    .button:hover {
-      background-color: #bfa335;
-      transform: translateY(-2px);
+    h1,h2,h3,p,ul{color:var(--ivory)}
+    .section{ margin-bottom:2.5rem; animation:slideUp 1.2s ease-out both }
+    @keyframes slideUp{ from{transform:translateY(18px);opacity:0} to{transform:translateY(0);opacity:1} }
+
+    .price{
+      font-size:2rem; color:var(--gold); font-weight:bold;
+      text-shadow:0 0 18px rgba(212,178,106,0.15);
     }
-    .bonus {
-      background-color: rgba(255, 255, 255, 0.05);
-      padding: 1.5rem;
-      border-left: 5px solid #d4af37;
-      border-right: 5px solid #d4af37;
-      border-radius: 10px;
-      margin-top: 2rem;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+
+    .button{
+      display:inline-block; padding:1rem 2rem;
+      background-color:var(--gold); color:var(--night-1);
+      text-decoration:none; border-radius:12px; font-weight:bold;
+      border-left:5px solid var(--gold); border-right:5px solid var(--gold);
+      margin:1rem auto; transition:transform .2s ease, background-color .3s ease, box-shadow .3s ease;
+      box-shadow:0 0 12px rgba(212,178,106,.35), 0 4px 20px rgba(0,0,0,.25);
     }
-    footer {
-      margin-top: 4rem;
-      font-size: 0.9rem;
-      text-align: center;
-      color: #fce7e7;
+    .button:hover{ background-color:var(--gold-2); transform:translateY(-2px) }
+
+    .bonus{
+      background-color:rgba(255,255,255,0.05);
+      padding:1.5rem; border-left:5px solid var(--gold); border-right:5px solid var(--gold);
+      border-radius:12px; margin-top:2rem;
+      box-shadow:0 0 10px rgba(212,178,106,.25);
+      backdrop-filter:saturate(120%) blur(2px);
     }
-    .image-banner {
-      width: 33%;
-      border-radius: 16px;
-      margin-bottom: 2rem;
-      box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+
+    footer{ margin-top:4rem; font-size:.92rem; color:#e2dac5 }
+
+    /* ----------- IMAGEN: movimiento místico ----------- */
+    .image-wrap{
+      perspective:800px; display:flex; justify-content:center;
+      margin-bottom:2rem;
     }
+    .image-banner{
+      width:33%; max-width:360px; min-width:260px;
+      border-radius:16px;
+      box-shadow:0 0 22px rgba(212,178,106,0.5), 0 8px 32px rgba(0,0,0,.35);
+      transform:translateZ(0);
+      animation: float 9.5s ease-in-out infinite;
+      will-change: transform, box-shadow;
+    }
+    @keyframes float{
+      0%,100%{ transform:translateY(0) rotateZ(0.15deg) }
+      50%{ transform:translateY(-6px) rotateZ(-0.15deg) }
+    }
+
+    /* Parallax suave con el ratón (se ajusta vía JS añadiendo transform) */
+    .parallax-tilt{
+      transition: transform 120ms ease-out;
+    }
+
+    /* Accesibilidad: foco visible para enlaces */
+    a:focus{ outline:2px solid var(--gold); outline-offset:3px }
   </style>
 </head>
 <body>
+  <!-- Fondo en capas -->
+  <div class="bg"></div>
+  <div class="stars"></div>
+  <div class="glow"></div>
+
   <div class="container">
-    <!-- Imagen principal -->
-    <img class="image-banner" src="brujita.jpg" alt="Tu bruja blanca personal">
+    <!-- Imagen principal con movimiento místico -->
+    <div class="image-wrap">
+      <img class="image-banner parallax-tilt" src="brujita.jpg" alt="Tu bruja blanca personal">
+    </div>
 
     <h1>Tu Bruja Blanca Personal</h1>
     <p>Tu guía digital para conectar con lo invisible, equilibrar tu energía y despertar tu poder interior.
- Tarot, lectura energética de imágenes, canalización, akasha, rituales y sabiduría antigua al alcance de tu alma.</p>
+      Tarot, lectura energética de imágenes, canalización, akasha, rituales y sabiduría antigua al alcance de tu alma.</p>
 
     <div class="section">
       <h2>¿Qué necesitas?</h2>
-      <ul style="list-style: none; padding: 0;">
-        <li>-> Tarot, carta astral <-</li>
-        <li>-> Rituales personalizados <-</li>
-        <li>-> Canalizaciones, guías espirituales, energía akáshica <-</li>
-        <li>-> Lectura de imágenes y símbolos <-</li>
-        <li>-> Numerología, ángeles, ciclos lunares, sintomatología emocional <-</li>
+      <ul style="list-style:none; padding:0; margin:0">
+        <li>→ Tarot, carta astral ←</li>
+        <li>→ Rituales personalizados ←</li>
+        <li>→ Canalizaciones, guías espirituales, energía akáshica ←</li>
+        <li>→ Lectura de imágenes y símbolos ←</li>
+        <li>→ Numerología, ángeles, ciclos lunares, sintomatología emocional ←</li>
       </ul>
     </div>
 
-    <!-- Botón central grande bonus -->
     <div class="section bonus">
       <h3>BONUS:</h3>
       <p>CON TODAS LAS CONSULTAS RECIBE NUMEROLOGÍA PERSONALIZADA DE REGALO</p>
     </div>
 
-    <!-- Botón compra mensual -->
     <div class="section">
-      <h2><span class="price">4,90€/ 1 herramienta de consulta</span></h2>
+      <h2><span class="price">4,90€ / 1 herramienta de consulta</span></h2>
       <p>Solicita lo que necesites. Recibe tu respuesta personalizada.</p>
       <p><strong>RELLENA EL FORMULARIO CON TUS DATOS Y EN MENOS DE 24H RECIBE TU RESPUESTA</strong></p>
       <a class="button" href="https://buy.stripe.com/28E00kflUasc2QLb7fbjW01">UNA CONSULTA</a>
     </div>
 
-    <!-- Botón compra vitalicia -->
     <div class="section">
-      <h2><span class="price">13,90€/ pack 3 herramientas de consulta</span></h2>
+      <h2><span class="price">13,90€ / pack 3 herramientas de consulta</span></h2>
       <p>Recibe las 3 predicciones que necesites, las que tú elijas EN MENOS DE 24H.</p>
       <a class="button" href="https://buy.stripe.com/bJecN6b5E2ZK2QLa3bbjW02">PACK CONSULTAS</a>
     </div>
 
     <footer>
-      © 2025 Tu Bruja Blanca Personal . Compra segura garantizada - Conectando almas con magia y tecnología ✨<br>
-      "Lo que parece simple, sostiene algo grande."
+      © 2025 Tu Bruja Blanca Personal · Compra segura garantizada — Conectando almas con magia y tecnología ✨<br/>
+      “Lo que parece simple, sostiene algo grande.”
     </footer>
   </div>
+
+  <!-- Parallax leve para la imagen -->
+  <script>
+    (function(){
+      const img = document.querySelector('.parallax-tilt');
+      let rafId = null;
+
+      function onMove(e){
+        const rect = img.getBoundingClientRect();
+        const cx = rect.left + rect.width/2;
+        const cy = rect.top + rect.height/2;
+        const dx = (e.clientX - cx) / rect.width;   // -0.5 .. 0.5 aprox
+        const dy = (e.clientY - cy) / rect.height;  // -0.5 .. 0.5 aprox
+        const rotX = dy * -2;  // ángulos muy pequeños
+        const rotY = dx * 2;
+        const transX = dx * 6;
+        const transY = dy * 6;
+
+        cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(()=>{
+          img.style.transform =
+            `translate3d(${transX}px, ${transY - 0}px, 0) rotateX(${rotX}deg) rotateY(${rotY}deg) rotateZ(0.05deg)`;
+        });
+      }
+
+      function reset(){
+        img.style.transform = '';
+      }
+
+      window.addEventListener('mousemove', onMove, {passive:true});
+      window.addEventListener('mouseout', reset);
+    })();
+  </script>
 </body>
 </html>
-
