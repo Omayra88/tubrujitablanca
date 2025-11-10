@@ -7,131 +7,137 @@
   <link rel="icon" type="image/png" href="favicon.ico">
 
   <style>
-    /* ----------- PALETA ----------- */
+    /* ======= estilos originales ======= */
     :root{
-      --night-1:#0d1b2a;   /* azul noche profundo */
-      --night-2:#1b263b;   /* azul noche medio   */
-      --ivory:#f8f6f0;     /* blanco marfil      */
-      --gold:#d4b26a;      /* dorado cálido      */
-      --gold-2:#c49c52;    /* hover dorado       */
+      --night-1:#0d1b2a;
+      --night-2:#1b263b;
+      --ivory:#f8f6f0;
+      --gold:#d4b26a;
+      --gold-2:#c49c52;
+      --danger:#e74c3c;
+      --ink:#0b0b0b;
     }
-
-    /* ----------- RESETEO BÁSICO ----------- */
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{
-      margin:0;
-      color:var(--ivory);
-      font-family:'Georgia', serif;
-      overflow-x:hidden;
-      animation:fadeIn 1.6s ease-in both;
-    }
+    body{margin:0;color:var(--ivory);font-family:'Georgia',serif;overflow-x:hidden;animation:fadeIn 1.6s ease-in both;}
     @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-
-    /* ----------- FONDO CAPAS ----------- */
-    .bg{
-      position:fixed; inset:0; z-index:0; pointer-events:none;
-      /* Capa base: degradado noche */
+    .bg{position:fixed;inset:0;z-index:0;pointer-events:none;
       background:
-        radial-gradient(1200px 800px at 80% 10%, rgba(212,178,106,0.15), transparent 60%),
-        radial-gradient(900px 600px at 15% 85%, rgba(212,178,106,0.10), transparent 65%),
-        linear-gradient(180deg, var(--night-2) 0%, var(--night-1) 100%);
+        radial-gradient(1200px 800px at 80% 10%,rgba(212,178,106,0.15),transparent 60%),
+        radial-gradient(900px 600px at 15% 85%,rgba(212,178,106,0.10),transparent 65%),
+        linear-gradient(180deg,var(--night-2)0%,var(--night-1)100%);
     }
-    /* Capa estrellas sutiles */
-    .stars, .stars::after{
-      content:""; position:fixed; inset:0; z-index:1; pointer-events:none;
+    .stars,.stars::after{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
       background-image:
-        radial-gradient(2px 2px at 10% 20%, rgba(255,255,255,0.35) 50%, transparent 51%),
-        radial-gradient(1.5px 1.5px at 30% 70%, rgba(255,255,255,0.25) 50%, transparent 51%),
-        radial-gradient(1.8px 1.8px at 60% 40%, rgba(255,255,255,0.28) 50%, transparent 51%),
-        radial-gradient(1.2px 1.2px at 85% 25%, rgba(255,255,255,0.22) 50%, transparent 51%),
-        radial-gradient(1.6px 1.6px at 75% 80%, rgba(255,255,255,0.22) 50%, transparent 51%),
-        radial-gradient(1.4px 1.4px at 45% 15%, rgba(255,255,255,0.20) 50%, transparent 51%),
-        radial-gradient(1.2px 1.2px at 55% 90%, rgba(255,255,255,0.18) 50%, transparent 51%);
-      background-repeat:no-repeat;
-      animation: drift 60s linear infinite;
+        radial-gradient(2px 2px at 10% 20%,rgba(255,255,255,0.35)50%,transparent 51%),
+        radial-gradient(1.5px 1.5px at 30% 70%,rgba(255,255,255,0.25)50%,transparent 51%),
+        radial-gradient(1.8px 1.8px at 60% 40%,rgba(255,255,255,0.28)50%,transparent 51%),
+        radial-gradient(1.2px 1.2px at 85% 25%,rgba(255,255,255,0.22)50%,transparent 51%),
+        radial-gradient(1.6px 1.6px at 75% 80%,rgba(255,255,255,0.22)50%,transparent 51%),
+        radial-gradient(1.4px 1.4px at 45% 15%,rgba(255,255,255,0.20)50%,transparent 51%),
+        radial-gradient(1.2px 1.2px at 55% 90%,rgba(255,255,255,0.18)50%,transparent 51%);
+      background-repeat:no-repeat;animation:drift 60s linear infinite;
     }
-    .stars::after{ animation-duration: 95s; opacity:.7; filter:blur(0.3px) }
-
-    /* Capa neblina/halo dorado animado muy sutil */
-    .glow{
-      position:fixed; inset:-10%; z-index:1; pointer-events:none;
+    .stars::after{animation-duration:95s;opacity:.7;filter:blur(.3px)}
+    .glow{position:fixed;inset:-10%;z-index:1;pointer-events:none;
       background:
-        radial-gradient(800px 800px at 80% 12%, rgba(212,178,106,0.18), transparent 65%),
-        radial-gradient(700px 700px at 18% 88%, rgba(212,178,106,0.12), transparent 70%);
-      mix-blend-mode:screen;
-      animation: breathe 14s ease-in-out infinite;
+        radial-gradient(800px 800px at 80% 12%,rgba(212,178,106,0.18),transparent 65%),
+        radial-gradient(700px 700px at 18% 88%,rgba(212,178,106,0.12),transparent 70%);
+      mix-blend-mode:screen;animation:breathe 14s ease-in-out infinite;
     }
-
-    @keyframes drift{
-      0%{ transform:translate3d(0,0,0) }
-      50%{ transform:translate3d(-1.2%, -0.8%, 0) }
-      100%{ transform:translate3d(0,0,0) }
-    }
-    @keyframes breathe{
-      0%,100%{ filter:blur(0.6px); opacity:.75; transform:scale(1)}
-      50%{ filter:blur(1.1px); opacity:.9; transform:scale(1.02)}
-    }
-
-    /* ----------- CONTENIDO ----------- */
-    .container{
-      position:relative; z-index:2;
-      max-width:820px; margin:0 auto; padding:2rem; text-align:center;
-    }
+    @keyframes drift{0%{transform:translate3d(0,0,0)}50%{transform:translate3d(-1.2%,-.8%,0)}100%{transform:translate3d(0,0,0)}}
+    @keyframes breathe{0%,100%{filter:blur(.6px);opacity:.75;transform:scale(1)}50%{filter:blur(1.1px);opacity:.9;transform:scale(1.02)}}
+    .container{position:relative;z-index:2;max-width:820px;margin:0 auto;padding:2rem;text-align:center;}
     h1,h2,h3,p,ul{color:var(--ivory)}
-    .section{ margin-bottom:2.5rem; animation:slideUp 1.2s ease-out both }
-    @keyframes slideUp{ from{transform:translateY(18px);opacity:0} to{transform:translateY(0);opacity:1} }
+    .section{margin-bottom:2.5rem;animation:slideUp 1.2s ease-out both}
+    @keyframes slideUp{from{transform:translateY(18px);opacity:0}to{transform:translateY(0);opacity:1}}
+    .price{font-size:2rem;color:var(--gold);font-weight:bold;text-shadow:0 0 18px rgba(212,178,106,0.15);}
+    .button{display:inline-block;padding:1rem 2rem;background-color:var(--gold);color:var(--night-1);
+      text-decoration:none;border-radius:12px;font-weight:bold;border-left:5px solid var(--gold);border-right:5px solid var(--gold);
+      margin:1rem auto;transition:transform .2s ease,background-color .3s ease,box-shadow .3s ease;
+      box-shadow:0 0 12px rgba(212,178,106,.35),0 4px 20px rgba(0,0,0,.25);}
+    .button:hover{background-color:var(--gold-2);transform:translateY(-2px)}
+    .bonus{background-color:rgba(255,255,255,0.05);padding:1.5rem;border-left:5px solid var(--gold);border-right:5px solid var(--gold);
+      border-radius:12px;margin-top:2rem;box-shadow:0 0 10px rgba(212,178,106,.25);backdrop-filter:saturate(120%) blur(2px);}
+    footer{margin-top:4rem;font-size:.92rem;color:#e2dac5}
+    .image-wrap{perspective:800px;display:flex;justify-content:center;margin-bottom:2rem;}
+    .image-banner{width:33%;max-width:360px;min-width:260px;border-radius:16px;
+      box-shadow:0 0 22px rgba(212,178,106,0.5),0 8px 32px rgba(0,0,0,.35);
+      transform:translateZ(0);animation:float 9.5s ease-in-out infinite;will-change:transform,box-shadow;}
+    @keyframes float{0%,100%{transform:translateY(0) rotateZ(.15deg)}50%{transform:translateY(-6px) rotateZ(-.15deg)}}
+    .parallax-tilt{transition:transform 120ms ease-out;}
+    a:focus{outline:2px solid var(--gold);outline-offset:3px}
 
-    .price{
-      font-size:2rem; color:var(--gold); font-weight:bold;
-      text-shadow:0 0 18px rgba(212,178,106,0.15);
-    }
-
-    .button{
-      display:inline-block; padding:1rem 2rem;
-      background-color:var(--gold); color:var(--night-1);
-      text-decoration:none; border-radius:12px; font-weight:bold;
-      border-left:5px solid var(--gold); border-right:5px solid var(--gold);
-      margin:1rem auto; transition:transform .2s ease, background-color .3s ease, box-shadow .3s ease;
-      box-shadow:0 0 12px rgba(212,178,106,.35), 0 4px 20px rgba(0,0,0,.25);
-    }
-    .button:hover{ background-color:var(--gold-2); transform:translateY(-2px) }
-
-    .bonus{
-      background-color:rgba(255,255,255,0.05);
-      padding:1.5rem; border-left:5px solid var(--gold); border-right:5px solid var(--gold);
-      border-radius:12px; margin-top:2rem;
-      box-shadow:0 0 10px rgba(212,178,106,.25);
-      backdrop-filter:saturate(120%) blur(2px);
-    }
-
-    footer{ margin-top:4rem; font-size:.92rem; color:#e2dac5 }
-
-    /* ----------- IMAGEN: movimiento místico ----------- */
-    .image-wrap{
-      perspective:800px; display:flex; justify-content:center;
-      margin-bottom:2rem;
-    }
-    .image-banner{
-      width:33%; max-width:360px; min-width:260px;
+    /* ======= tarjetas de producto con precio tachado ======= */
+    .deal-card{
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.12);
       border-radius:16px;
-      box-shadow:0 0 22px rgba(212,178,106,0.5), 0 8px 32px rgba(0,0,0,.35);
-      transform:translateZ(0);
-      animation: float 9.5s ease-in-out infinite;
-      will-change: transform, box-shadow;
+      padding:22px;
+      text-align:center;
+      box-shadow:0 0 10px rgba(212,178,106,.18);
     }
-    @keyframes float{
-      0%,100%{ transform:translateY(0) rotateZ(0.15deg) }
-      50%{ transform:translateY(-6px) rotateZ(-0.15deg) }
+    .deal-header{
+      display:flex;flex-direction:column;gap:.35rem;align-items:center;justify-content:center;margin-bottom:.75rem
+    }
+    .badge-limited{
+      display:inline-block; font-size:.85rem; letter-spacing:.2px;
+      background:rgba(212,178,106,.14); border:1px solid rgba(212,178,106,.45);
+      color:var(--ivory); padding:.35rem .6rem; border-radius:999px;
+    }
+    .price-row{
+      display:flex; gap:10px; align-items:baseline; justify-content:center; flex-wrap:wrap;
+    }
+    .price-old{
+      position:relative; color:var(--danger); opacity:.9; font-weight:700;
+      padding:0 .35rem; font-size:1.1rem;
+    }
+    .price-old::after{
+      content:""; position:absolute; left:-3px; right:-3px; top:55%;
+      height:2px; background:#000; transform:rotate(-5deg);
+      box-shadow:0 0 0 1px rgba(0,0,0,.06);
+    }
+    .price-now{
+      font-size:2rem; color:var(--gold); font-weight:800; text-shadow:0 0 18px rgba(212,178,106,.18);
+    }
+    @media (max-width:520px){
+      .price-now{font-size:1.75rem}
+      .price-old{font-size:1rem}
     }
 
-    /* Parallax suave con el ratón (se ajusta vía JS añadiendo transform) */
-    .parallax-tilt{
-      transition: transform 120ms ease-out;
+    /* ======= animación de llamada en botones ======= */
+    .attn{animation:tbbp-pulse 2.8s ease-in-out infinite;will-change:transform,box-shadow}
+    .attn:hover{animation:tbbp-wiggle .6s ease-in-out both}
+    @keyframes tbbp-pulse{
+      0%,100%{transform:translateY(0) scale(1);box-shadow:0 0 12px rgba(212,178,106,.35),0 4px 20px rgba(0,0,0,.25)}
+      50%{transform:translateY(-2px) scale(1.03);box-shadow:0 0 18px rgba(212,178,106,.6),0 8px 26px rgba(0,0,0,.35)}
     }
+    @keyframes tbbp-wiggle{
+      0%{transform:translateY(-1px) rotate(0)}
+      25%{transform:translateY(-1px) rotate(.6deg)}
+      50%{transform:translateY(-1px) rotate(0)}
+      75%{transform:translateY(-1px) rotate(-.6deg)}
+      100%{transform:translateY(-1px) rotate(0)}
+    }
+    @media (prefers-reduced-motion:reduce){.attn{animation:none}.attn:hover{animation:none}}
 
-    /* Accesibilidad: foco visible para enlaces */
-    a:focus{ outline:2px solid var(--gold); outline-offset:3px }
+    /* ======= bloque formulario/testimonios ======= */
+    .tbbp-wrap{max-width:820px;margin:0 auto;padding:2rem;text-align:left}
+    .tbbp-card{background-color:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);
+      border-radius:16px;padding:1.5rem;margin-bottom:2rem;}
+    .tbbp-field{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+    .tbbp-input,.tbbp-textarea{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);
+      border-radius:10px;padding:12px;color:var(--ivory);font-family:inherit}
+    .tbbp-textarea{min-height:100px;resize:vertical}
+    .tbbp-btn{background:var(--gold);color:var(--night-1);border:0;padding:12px 16px;border-radius:12px;
+      font-weight:bold;cursor:pointer;transition:transform .2s}
+    .tbbp-btn:hover{transform:translateY(-1px);background:var(--gold-2)}
+    .tbbp-ok{margin-top:10px;background:#0f5132;color:#d1f7e0;padding:10px;border-radius:8px;font-size:.9rem}
+    .tbbp-err{margin-top:10px;background:#5c1a1a;color:#ffd8d8;padding:10px;border-radius:8px;font-size:.9rem}
+    .tbbp-video-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));margin-top:1rem}
+    .tbbp-vcard{background:#000;border:1px solid rgba(255,255,255,.1);border-radius:14px;overflow:hidden}
+    .tbbp-vcard video,.tbbp-vcard iframe{width:100%;aspect-ratio:9/16;display:block}
+    .tbbp-vcap{padding:8px;font-size:.85rem;opacity:.9}
   </style>
 </head>
 <body>
@@ -141,7 +147,7 @@
   <div class="glow"></div>
 
   <div class="container">
-    <!-- Imagen principal con movimiento místico -->
+    <!-- Imagen principal -->
     <div class="image-wrap">
       <img class="image-banner parallax-tilt" src="brujita.jpg" alt="Tu bruja blanca personal">
     </div>
@@ -169,19 +175,78 @@
       <p>✨CON TODAS LAS CONSULTAS RECIBE NUMEROLOGÍA PERSONALIZADA DE REGALO✨</p>
     </div>
 
+    <!-- PRODUCTO 1 -->
     <div class="section">
-      <h2><span class="price">8,90€ / 1 herramienta de consulta</span></h2>
-      <p>Solicita lo que necesites. Recibe tu respuesta personalizada.</p>
-      <p><strong>EN MENOS DE 24H RECIBE TU RESPUESTA</strong></p>
-      <a class="button" href="https://buy.stripe.com/6oU28s7TsbwgeztejrbjW0c">🔮QUIERO MI RESPUESTA AHORA🔮</a>
+      <div class="deal-card">
+        <div class="deal-header">
+          <span class="badge-limited">Ahora y solo por tiempo limitado</span>
+          <div class="price-row">
+            <span class="price-old">39,50€</span>
+            <span class="price-now">8,90€</span>
+          </div>
+        </div>
+        <h2 class="price">1 herramienta de consulta</h2>
+        <p>Solicita lo que necesites. Recibe tu respuesta personalizada.</p>
+        <p><strong>EN MENOS DE 24H RECIBE TU RESPUESTA</strong></p>
+        <a class="button attn" href="https://buy.stripe.com/6oU28s7TsbwgeztejrbjW0c">🔮QUIERO MI RESPUESTA AHORA🔮</a>
+      </div>
     </div>
 
+    <!-- PRODUCTO 2 -->
     <div class="section">
-      <h2><span class="price">25,00€ / pack 3 herramientas de consulta</span></h2>
-      <p>Solicita lo que necesites. Recibe tu respuesta personalizada.</p>
-      <p><strong>EN MENOS DE 24H RECIBE TUS RESPUESTAS.</strong></p>
-      <a class="button" href="https://buy.stripe.com/3cI3cw5Lk6bWbnhejrbjW0d">🔮QUIERO MIS RESPUESTAS AHORA🔮</a>
+      <div class="deal-card">
+        <div class="deal-header">
+          <span class="badge-limited">Ahora y solo por tiempo limitado</span>
+          <div class="price-row">
+            <span class="price-old">69,90€</span>
+            <span class="price-now">25,00€</span>
+          </div>
+        </div>
+        <h2 class="price">Pack 3 herramientas de consulta</h2>
+        <p>Solicita lo que necesites. Recibe tu respuesta personalizada.</p>
+        <p><strong>EN MENOS DE 24H RECIBE TUS RESPUESTAS.</strong></p>
+        <a class="button attn" href="https://buy.stripe.com/3cI3cw5Lk6bWbnhejrbjW0d">🔮QUIERO MIS RESPUESTAS AHORA🔮</a>
+      </div>
     </div>
+
+    <!-- FORM + TESTIMONIOS -->
+    <section class="tbbp-wrap">
+      <div class="tbbp-card">
+        <h2>¿Quieres que te avise de nuevas lecturas o promociones?</h2>
+        <form id="tbbp-form">
+          <div class="tbbp-field"><label>Nombre</label><input class="tbbp-input" name="nombre" required></div>
+          <div class="tbbp-field"><label>Email</label><input class="tbbp-input" type="email" name="email" required></div>
+          <div class="tbbp-field"><label>Teléfono (opcional)</label><input class="tbbp-input" name="telefono"></div>
+          <div class="tbbp-field"><label>Mensaje</label><textarea class="tbbp-textarea" name="mensaje" placeholder="Escribe tu consulta o petición..."></textarea></div>
+          <div class="tbbp-field">
+            <label><input type="checkbox" name="consentimiento" required> Acepto la política de privacidad</label>
+          </div>
+          <input type="hidden" name="utm_source"><input type="hidden" name="utm_medium"><input type="hidden" name="utm_campaign">
+          <button type="submit" class="tbbp-btn" id="tbbp-send">Enviar</button>
+          <div id="tbbp-msg"></div>
+        </form>
+      </div>
+
+      <div class="tbbp-card">
+        <h2>Testimonios</h2>
+        <div class="tbbp-video-grid">
+          <div class="tbbp-vcard">
+            <video controls playsinline muted preload="metadata" poster="poster1.jpg">
+              <source src="videos/test1.mp4" type="video/mp4">
+            </video><div class="tbbp-vcap">“Impresionante lectura” – Laura</div>
+          </div>
+          <div class="tbbp-vcard">
+            <iframe src="https://drive.google.com/file/d/GOOGLE_DRIVE_FILE_ID/preview" allow="autoplay" loading="lazy" style="border:0"></iframe>
+            <div class="tbbp-vcap">“Muy acertada” – Ivonne</div>
+          </div>
+          <div class="tbbp-vcard">
+            <video controls playsinline muted preload="metadata" poster="poster2.jpg">
+              <source src="videos/test2.mp4" type="video/mp4">
+            </video><div class="tbbp-vcap">“Volveré a consultar” – Brandon</div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <footer>
       © 2025 Tu Brujita Blanca Personal · Compra segura garantizada —✨ Conectando almas con magia y tecnología ✨<br/>
@@ -189,36 +254,65 @@
     </footer>
   </div>
 
-  <!-- Parallax leve para la imagen -->
+  <!-- Parallax leve -->
   <script>
     (function(){
       const img = document.querySelector('.parallax-tilt');
+      if(!img) return;
       let rafId = null;
-
       function onMove(e){
         const rect = img.getBoundingClientRect();
         const cx = rect.left + rect.width/2;
         const cy = rect.top + rect.height/2;
-        const dx = (e.clientX - cx) / rect.width;   // -0.5 .. 0.5 aprox
-        const dy = (e.clientY - cy) / rect.height;  // -0.5 .. 0.5 aprox
-        const rotX = dy * -2;  // ángulos muy pequeños
+        const dx = (e.clientX - cx) / rect.width;
+        const dy = (e.clientY - cy) / rect.height;
+        const rotX = dy * -2;
         const rotY = dx * 2;
         const transX = dx * 6;
         const transY = dy * 6;
-
         cancelAnimationFrame(rafId);
         rafId = requestAnimationFrame(()=>{
-          img.style.transform =
-            `translate3d(${transX}px, ${transY - 0}px, 0) rotateX(${rotX}deg) rotateY(${rotY}deg) rotateZ(0.05deg)`;
+          img.style.transform = `translate3d(${transX}px, ${transY}px, 0) rotateX(${rotX}deg) rotateY(${rotY}deg) rotateZ(0.05deg)`;
         });
       }
-
-      function reset(){
-        img.style.transform = '';
+      function reset(){ img.style.transform = ''; }
+      const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+      if(!isMobile){
+        window.addEventListener('mousemove', onMove, {passive:true});
+        window.addEventListener('mouseout', reset);
       }
+    })();
 
-      window.addEventListener('mousemove', onMove, {passive:true});
-      window.addEventListener('mouseout', reset);
+    /* envío a Google Sheet */
+    const TBBP_SCRIPT_URL='PON_AQUI_TU_SCRIPT_URL';
+    (function(){
+      const f=document.getElementById('tbbp-form'); if(!f) return;
+      const b=document.getElementById('tbbp-send');
+      const m=document.getElementById('tbbp-msg');
+
+      (function(){
+        const params = new URLSearchParams(location.search);
+        ['utm_source','utm_medium','utm_campaign'].forEach(k=>{
+          const v=params.get(k);
+          if(v) f.querySelector(`[name="${k}"]`).value=v;
+        });
+      })();
+
+      f.addEventListener('submit', async (e)=>{
+        e.preventDefault(); m.textContent=''; b.disabled=true; b.textContent='Enviando…';
+        const fd=new FormData(f); const data=Object.fromEntries(fd.entries());
+        data.consentimiento=!!fd.get('consentimiento'); data.userAgent=navigator.userAgent;
+        try{
+          const r=await fetch(TBBP_SCRIPT_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+          const j=await r.json();
+          if(j.ok){ m.innerHTML='<div class="tbbp-ok">¡Gracias! Pronto te escribiré.</div>'; f.reset(); }
+          else{ throw new Error(j.error||'Error'); }
+        }catch(err){
+          console.error(err); m.innerHTML='<div class="tbbp-err">No se pudo enviar. Inténtalo de nuevo.</div>';
+        }finally{
+          b.disabled=false; b.textContent='Enviar';
+        }
+      });
     })();
   </script>
 </body>
