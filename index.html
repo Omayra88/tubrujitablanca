@@ -430,8 +430,13 @@ details.fold .how-steps li::marker {
 
     <!-- FORM + TESTIMONIOS -->
     <section class="tbbp-wrap">
-      <div class="tbbp-card">
-        <h2>¡Avísame de nuevas lecturas o promociones!</h2>
+      <details class="fold tbbp-card">
+  <summary>
+    <h2 class="fold-title">¡Avísame de nuevas lecturas o promociones!</h2>
+    <span class="fold-btn">+</span>
+  </summary>
+  <div class="fold-body">
+
         <form id="tbbp-form">
           <div class="tbbp-field"><label>Nombre</label><input class="tbbp-input" name="nombre" required></div>
           <div class="tbbp-field"><label>Email</label><input class="tbbp-input" type="email" name="email" required></div>
@@ -445,6 +450,7 @@ details.fold .how-steps li::marker {
           <div id="tbbp-msg"></div>
         </form>
       </div>
+        </details>
 
       <div class="tbbp-card">
         <h2>Testimonios</h2>
