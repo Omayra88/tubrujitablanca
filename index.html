@@ -165,18 +165,64 @@ dialog#shotbox::backdrop{ background:rgba(0,0,0,.65) }
   padding:8px 12px; border-radius:999px; cursor:pointer
 }
 
-    .how-card h2{ margin-top:.25rem; margin-bottom:.75rem }
-.how-steps{ margin:.25rem 0 1rem 1.25rem }
-.how-steps li{ margin:.25rem 0 }
-.how-grid{
-  display:grid; gap:16px;
-  grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
-  margin:.5rem 0 0;
+
+    /* === SECCIÓN: Cómo funciona (diseño mejorado, sin afectar el resto) === */
+.how-card{
+  text-align:left;
+  padding:28px 28px 22px;
+  border-radius:18px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 8px 24px rgba(0,0,0,.20), inset 0 0 12px rgba(212,178,106,.08);
+  backdrop-filter:saturate(115%) blur(2px);
 }
-.how-sub{ font-size:1rem; margin:.25rem 0 .35rem }
-.how-list{ margin:.25rem 0 0 1.1rem }
-.how-list li{ margin:.2rem 0 }
-.how-note{ opacity:.85; margin-top:.75rem; font-size:.9rem }
+.how-title{
+  text-align:center;
+  margin:0 0 14px;
+  font-size:1.75rem;
+}
+.how-steps{
+  max-width:820px;
+  margin:0 auto 16px;
+  padding-left:1.4rem;
+  list-style-position:outside;
+}
+.how-steps li{ margin:.25rem 0; line-height:1.45; }
+
+.how-two{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+  align-items:start;
+  max-width:920px;
+  margin:0 auto;
+}
+.how-block{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:14px;
+  padding:14px 16px;
+}
+.how-block h3{ margin:.25rem 0 .55rem; font-size:1.15rem; }
+.how-block ul{ margin:0; padding-left:1.1rem; }
+.how-block li{ margin:.22rem 0; }
+
+.how-note{
+  text-align:center;
+  opacity:.85;
+  margin-top:14px;
+  font-size:.95rem;
+}
+
+/* Link dorado dentro del bloque */
+.how-card a{ color:var(--gold); text-decoration:none; font-weight:700; }
+.how-card a:hover{ text-decoration:underline; }
+
+/* Versión móvil */
+@media (max-width:720px){
+  .how-two{ grid-template-columns:1fr; }
+  .how-title{ font-size:1.5rem; }
+}
 
   </style>
 </head>
@@ -249,32 +295,33 @@ dialog#shotbox::backdrop{ background:rgba(0,0,0,.65) }
       </div>
     </div>
 
-    <!-- CÓMO FUNCIONA -->
+<!-- CÓMO FUNCIONA -->
 <div class="tbbp-card how-card">
-  <h2>¿Cómo funciona?</h2>
+  <h2 class="how-title">¿Cómo funciona?</h2>
+
   <ol class="how-steps">
     <li><strong>Compra</strong> la opción que prefieras.</li>
-    <li><strong>Guarda una captura</strong> del comprobante de pago.</li>
+    <li><strong>Guarda</strong> el comprobante de pago (captura).</li>
     <li>
       <strong>Envía un email</strong> a
       <a href="mailto:atencion@tubrujitablancapersonal.com">atencion@tubrujitablancapersonal.com</a>
-      con el comprobante <em>y</em> lo siguiente:
+      con el comprobante y los datos que ves abajo.
     </li>
   </ol>
 
-  <div class="how-grid">
-    <div>
-      <h3 class="how-sub">Datos para lecturas generales</h3>
-      <ul class="how-list">
+  <div class="how-two">
+    <div class="how-block">
+      <h3>Datos para lecturas generales</h3>
+      <ul>
         <li>Nombre y apellidos completos</li>
         <li>Fecha, <strong>hora</strong> y lugar de nacimiento</li>
         <li>Herramienta(s) elegida(s) y tu pregunta/objetivo</li>
       </ul>
     </div>
 
-    <div>
-      <h3 class="how-sub">Si pides lectura de imagen</h3>
-      <ul class="how-list">
+    <div class="how-block">
+      <h3>Si pides lectura de imagen</h3>
+      <ul>
         <li>Selfie frontal, sin sonrisa</li>
         <li>Cabeza completa y hasta debajo de las clavículas</li>
         <li>Buena luz, sin filtros ni gafas</li>
@@ -282,9 +329,7 @@ dialog#shotbox::backdrop{ background:rgba(0,0,0,.65) }
     </div>
   </div>
 
-  <p class="how-note">
-    * Con datos claros la lectura es más precisa. Si falta información, te escribiré para completarla.
-  </p>
+  <p class="how-note">Con datos claros la lectura es más precisa. Si falta algo, te escribiré para completarlo.</p>
 </div>
 
 
