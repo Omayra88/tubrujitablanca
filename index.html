@@ -284,7 +284,7 @@
     })();
 
     /* envío a Google Sheet */
-    const TBBP_SCRIPT_URL='PON_AQUI_TU_SCRIPT_URL';
+    const TBBP_SCRIPT_URL='https://script.google.com/macros/s/AKfycbwsF2IyO4sECxuKd9LNy3yrTVsVmMuChEnOlJSDmH214bAiH0MIkhBJV1J7ohMVZnLt/exec';
     (function(){
       const f=document.getElementById('tbbp-form'); if(!f) return;
       const b=document.getElementById('tbbp-send');
@@ -298,22 +298,39 @@
         });
       })();
 
-      f.addEventListener('submit', async (e)=>{
-        e.preventDefault(); m.textContent=''; b.disabled=true; b.textContent='Enviando…';
-        const fd=new FormData(f); const data=Object.fromEntries(fd.entries());
-        data.consentimiento=!!fd.get('consentimiento'); data.userAgent=navigator.userAgent;
-        try{
-          const r=await fetch(TBBP_SCRIPT_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
-          const j=await r.json();
-          if(j.ok){ m.innerHTML='<div class="tbbp-ok">¡Gracias! Pronto te escribiré.</div>'; f.reset(); }
-          else{ throw new Error(j.error||'Error'); }
-        }catch(err){
-          console.error(err); m.innerHTML='<div class="tbbp-err">No se pudo enviar. Inténtalo de nuevo.</div>';
-        }finally{
-          b.disabled=false; b.textContent='Enviar';
-        }
-      });
-    })();
-  </script>
+ f.addEventListener('submit', async (e)=>{
+  e.preventDefault(); 
+  m.textContent=''; 
+  b.disabled=true; 
+  b.textContent='Enviando…';
+
+  const fd=new FormData(f); 
+  const data=Object.fromEntries(fd.entries());
+  data.consentimiento=!!fd.get('consentimiento'); 
+  data.userAgent=navigator.userAgent;
+
+  try{
+    const r=await fetch(TBBP_SCRIPT_URL,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(data)
+    });
+    const j=await r.json();
+    if(j.ok){
+      m.innerHTML='<div class="tbbp-ok">¡Gracias! Pronto te escribiré.</div>'; 
+      f.reset(); 
+    } else {
+      throw new Error(j.error||'Error');
+    }
+  }catch(err){
+    console.error(err); 
+    m.innerHTML='<div class="tbbp-err">No se pudo enviar. Inténtalo de nuevo.</div>';
+  }finally{
+    b.disabled=false; 
+    b.textContent='Enviar';
+  }
+}); // cierra addEventListener
+})(); // cierra la IIFE
+</script>
 </body>
 </html>
