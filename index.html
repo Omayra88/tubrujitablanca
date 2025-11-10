@@ -256,82 +256,78 @@
 
   <!-- Parallax leve -->
   <script>
+  (function(){
+    const img = document.querySelector('.parallax-tilt');
+    if(!img) return;
+    let rafId = null;
+    function onMove(e){
+      const rect = img.getBoundingClientRect();
+      const cx = rect.left + rect.width/2;
+      const cy = rect.top + rect.height/2;
+      const dx = (e.clientX - cx) / rect.width;
+      const dy = (e.clientY - cy) / rect.height;
+      const rotX = dy * -2;
+      const rotY = dx * 2;
+      const transX = dx * 6;
+      const transY = dy * 6;
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(()=>{
+        img.style.transform = `translate3d(${transX}px, ${transY}px, 0) rotateX(${rotX}deg) rotateY(${rotY}deg) rotateZ(0.05deg)`;
+      });
+    }
+    function reset(){ img.style.transform = ''; }
+    const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+    if(!isMobile){
+      window.addEventListener('mousemove', onMove, {passive:true});
+      window.addEventListener('mouseout', reset);
+    }
+  })();
+
+  /* envío a Google Sheet */
+  const TBBP_SCRIPT_URL='https://script.google.com/macros/s/AKfycbwsF2IyO4sECxuKd9LNy3yrTVsVmMuChEnOlJSDmH214bAiH0MIkhBJV1J7ohMVZnLt/exec';
+  (function(){
+    const f=document.getElementById('tbbp-form'); if(!f) return;
+    const b=document.getElementById('tbbp-send');
+    const m=document.getElementById('tbbp-msg');
+
     (function(){
-      const img = document.querySelector('.parallax-tilt');
-      if(!img) return;
-      let rafId = null;
-      function onMove(e){
-        const rect = img.getBoundingClientRect();
-        const cx = rect.left + rect.width/2;
-        const cy = rect.top + rect.height/2;
-        const dx = (e.clientX - cx) / rect.width;
-        const dy = (e.clientY - cy) / rect.height;
-        const rotX = dy * -2;
-        const rotY = dx * 2;
-        const transX = dx * 6;
-        const transY = dy * 6;
-        cancelAnimationFrame(rafId);
-        rafId = requestAnimationFrame(()=>{
-          img.style.transform = `translate3d(${transX}px, ${transY}px, 0) rotateX(${rotX}deg) rotateY(${rotY}deg) rotateZ(0.05deg)`;
-        });
-      }
-      function reset(){ img.style.transform = ''; }
-      const isMobile = /Mobi|Android/i.test(navigator.userAgent);
-      if(!isMobile){
-        window.addEventListener('mousemove', onMove, {passive:true});
-        window.addEventListener('mouseout', reset);
-      }
+      const params = new URLSearchParams(location.search);
+      ['utm_source','utm_medium','utm_campaign'].forEach(k=>{
+        const v=params.get(k);
+        if(v) f.querySelector(`[name="${k}"]`).value=v;
+      });
     })();
 
-    /* envío a Google Sheet */
-    const TBBP_SCRIPT_URL='https://script.google.com/macros/s/AKfycbwsF2IyO4sECxuKd9LNy3yrTVsVmMuChEnOlJSDmH214bAiH0MIkhBJV1J7ohMVZnLt/exec';
-    (function(){
-      const f=document.getElementById('tbbp-form'); if(!f) return;
-      const b=document.getElementById('tbbp-send');
-      const m=document.getElementById('tbbp-msg');
+    f.addEventListener('submit', async (e)=>{
+      e.preventDefault(); 
+      m.textContent=''; 
+      b.disabled=true; 
+      b.textContent='Enviando…';
 
-      (function(){
-        const params = new URLSearchParams(location.search);
-        ['utm_source','utm_medium','utm_campaign'].forEach(k=>{
-          const v=params.get(k);
-          if(v) f.querySelector(`[name="${k}"]`).value=v;
-        });
-      })();
+      const fd=new FormData(f); 
+      const data=Object.fromEntries(fd.entries());
+      data.consentimiento=!!fd.get('consentimiento'); 
+      data.userAgent=navigator.userAgent;
 
- f.addEventListener('submit', async (e)=>{
-  e.preventDefault(); 
-  m.textContent=''; 
-  b.disabled=true; 
-  b.textContent='Enviando…';
+      try{
+        /* ✅ SIN headers y cuerpo form-encoded para evitar preflight/CORS */
+        const body = new URLSearchParams(data);
+        const r = await fetch(TBBP_SCRIPT_URL, { method: 'POST', body });
+        const j = JSON.parse(await r.text());
 
-  const fd=new FormData(f); 
-  const data=Object.fromEntries(fd.entries());
-  data.consentimiento=!!fd.get('consentimiento'); 
-  data.userAgent=navigator.userAgent;
-
-  try{
-  const r = await fetch(TBBP_SCRIPT_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-    body: JSON.stringify(data)
-  });
-  const j = await r.json();
-
-    if(j.ok){
-      m.innerHTML='<div class="tbbp-ok">¡Gracias! Pronto te escribiré.</div>'; 
-      f.reset(); 
-    } else {
-      throw new Error(j.error||'Error');
-    }
-  }catch(err){
-    console.error(err); 
-    m.innerHTML='<div class="tbbp-err">No se pudo enviar. Inténtalo de nuevo.</div>';
-  }finally{
-    b.disabled=false; 
-    b.textContent='Enviar';
-  }
-}); // cierra addEventListener
-})(); // cierra la IIFE
+        if(j.ok){
+          m.innerHTML='<div class="tbbp-ok">¡Gracias! Pronto te escribiré.</div>'; 
+          f.reset(); 
+        } else {
+          throw new Error(j.error||'Error');
+        }
+      }catch(err){
+        console.error(err); 
+        m.innerHTML='<div class="tbbp-err">No se pudo enviar. Inténtalo de nuevo.</div>';
+      }finally{
+        b.disabled=false; 
+        b.textContent='Enviar';
+      }
+    });
+  })();
 </script>
-</body>
-</html>
