@@ -165,6 +165,19 @@ dialog#shotbox::backdrop{ background:rgba(0,0,0,.65) }
   padding:8px 12px; border-radius:999px; cursor:pointer
 }
 
+    .how-card h2{ margin-top:.25rem; margin-bottom:.75rem }
+.how-steps{ margin:.25rem 0 1rem 1.25rem }
+.how-steps li{ margin:.25rem 0 }
+.how-grid{
+  display:grid; gap:16px;
+  grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+  margin:.5rem 0 0;
+}
+.how-sub{ font-size:1rem; margin:.25rem 0 .35rem }
+.how-list{ margin:.25rem 0 0 1.1rem }
+.how-list li{ margin:.2rem 0 }
+.how-note{ opacity:.85; margin-top:.75rem; font-size:.9rem }
+
   </style>
 </head>
 <body>
@@ -235,6 +248,45 @@ dialog#shotbox::backdrop{ background:rgba(0,0,0,.65) }
         <a class="button attn" href="https://buy.stripe.com/3cI3cw5Lk6bWbnhejrbjW0d">🔮QUIERO MIS RESPUESTAS AHORA🔮</a>
       </div>
     </div>
+
+    <!-- CÓMO FUNCIONA -->
+<div class="tbbp-card how-card">
+  <h2>¿Cómo funciona?</h2>
+  <ol class="how-steps">
+    <li><strong>Compra</strong> la opción que prefieras.</li>
+    <li><strong>Guarda una captura</strong> del comprobante de pago.</li>
+    <li>
+      <strong>Envía un email</strong> a
+      <a href="mailto:atencion@tubrujitablancapersonal.com">atencion@tubrujitablancapersonal.com</a>
+      con el comprobante <em>y</em> lo siguiente:
+    </li>
+  </ol>
+
+  <div class="how-grid">
+    <div>
+      <h3 class="how-sub">Datos para lecturas generales</h3>
+      <ul class="how-list">
+        <li>Nombre y apellidos completos</li>
+        <li>Fecha, <strong>hora</strong> y lugar de nacimiento</li>
+        <li>Herramienta(s) elegida(s) y tu pregunta/objetivo</li>
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="how-sub">Si pides lectura de imagen</h3>
+      <ul class="how-list">
+        <li>Selfie frontal, sin sonrisa</li>
+        <li>Cabeza completa y hasta debajo de las clavículas</li>
+        <li>Buena luz, sin filtros ni gafas</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="how-note">
+    * Con datos claros la lectura es más precisa. Si falta información, te escribiré para completarla.
+  </p>
+</div>
+
 
     <!-- FORM + TESTIMONIOS -->
     <section class="tbbp-wrap">
