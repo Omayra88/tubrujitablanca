@@ -263,6 +263,33 @@ details.fold .fold-body{
   to{opacity:1;transform:translateY(0)}
 }
 
+
+
+/* Tipografía y ritmo dentro del desplegable */
+.fold .how-steps{ margin:0 0 14px; padding-left:1.1rem; list-style-position:outside; }
+.fold .how-steps li{ margin:.3rem 0; line-height:1.55; }
+
+.fold .how-two{
+  display:grid; grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px; align-items:start; margin-top:4px;
+}
+.fold .how-block{
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:12px; padding:14px 16px;
+}
+.fold .how-block h3{ margin:0 0 .5rem; font-size:1.08rem; }
+.fold .how-block ul{ margin:0; padding-left:1.1rem; }
+.fold .how-block li{ margin:.18rem 0; }
+
+.fold .how-note{ text-align:center; margin-top:12px; font-size:.95rem; opacity:.85; }
+
+/* Móvil */
+@media (max-width:720px){
+  .fold .how-two{ grid-template-columns:1fr; }
+  .fold-title{ font-size:1.4rem; }
+}
+
   </style>
 </head>
 <body>
