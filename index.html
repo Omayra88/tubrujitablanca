@@ -138,6 +138,33 @@
     .tbbp-vcard{background:#000;border:1px solid rgba(255,255,255,.1);border-radius:14px;overflow:hidden}
     .tbbp-vcard video,.tbbp-vcard iframe{width:100%;aspect-ratio:9/16;display:block}
     .tbbp-vcap{padding:8px;font-size:.85rem;opacity:.9}
+    /* === Capturas de testimonios (screenshots) === */
+.tbbp-img-grid{
+  display:grid; gap:16px;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  margin-top:1rem;
+}
+.shot-card{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:14px; overflow:hidden;
+}
+.shot-img{
+  width:100%; aspect-ratio:4/5; object-fit:cover; display:block;
+  filter:contrast(1.02);
+  cursor:zoom-in;
+}
+.shot-cap{ padding:10px; font-size:.85rem; opacity:.9 }
+
+dialog#shotbox{ border:0; padding:0; background:transparent }
+dialog#shotbox::backdrop{ background:rgba(0,0,0,.65) }
+#shotbox-img{ max-width:92vw; max-height:88vh; display:block; border-radius:12px }
+#shotbox-close{
+  position:fixed; top:14px; right:14px;
+  background:rgba(0,0,0,.6); color:#fff; border:0;
+  padding:8px 12px; border-radius:999px; cursor:pointer
+}
+
   </style>
 </head>
 <body>
@@ -246,6 +273,28 @@
           </div>
         </div>
       </div>
+      <div class="tbbp-card">
+  <h2>Capturas de testimonios</h2>
+  <p style="opacity:.85;margin:.25rem 0 1rem">Mensajes y reseñas reales.</p>
+
+  <div class="tbbp-img-grid">
+    <figure class="shot-card">
+      <img class="shot-img" src="shots/test-01.jpg" alt="Testimonio de Ana" loading="lazy">
+      <figcaption class="shot-cap">“Me clavaste la lectura.” — Ana</figcaption>
+    </figure>
+
+    <figure class="shot-card">
+      <img class="shot-img" src="shots/test-02.jpg" alt="Testimonio de Ivonne" loading="lazy">
+      <figcaption class="shot-cap">“Muy precisa y rápida.” — Ivonne</figcaption>
+    </figure>
+
+    <figure class="shot-card">
+      <img class="shot-img" src="shots/test-03.jpg" alt="Testimonio de Brandon" loading="lazy">
+      <figcaption class="shot-cap">“Volveré a consultar.” — Brandon</figcaption>
+    </figure>
+  </div>
+</div>
+
     </section>
 
     <footer>
@@ -332,3 +381,31 @@
     });
   })();
 </script>
+  <!-- Lightbox para ampliar capturas -->
+<dialog id="shotbox">
+  <button id="shotbox-close" aria-label="Cerrar">Cerrar ✕</button>
+  <img id="shotbox-img" alt="Captura ampliada">
+</dialog>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    const dlg = document.getElementById('shotbox');
+    const big = document.getElementById('shotbox-img');
+    const closeBtn = document.getElementById('shotbox-close');
+
+    document.querySelectorAll('.shot-img').forEach(img=>{
+      img.addEventListener('click', ()=>{
+        big.src = img.src;
+        big.alt = img.alt || 'Captura de testimonio';
+        dlg.showModal();
+      });
+    });
+
+    closeBtn.addEventListener('click', ()=> dlg.close());
+    dlg.addEventListener('click', (e)=>{ if(e.target === dlg) dlg.close(); });
+  });
+</script>
+
+</body>
+</html>
+
