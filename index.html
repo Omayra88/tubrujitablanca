@@ -290,6 +290,28 @@ details.fold .fold-body{
   .fold-title{ font-size:1.4rem; }
 }
 
+    /* --- Ajuste visual para los puntos del bloque "¿Cómo funciona?" --- */
+details.fold,
+details.fold .fold-body {
+  text-align: left; /* alinea todo a la izquierda */
+}
+
+details.fold .how-steps {
+  padding-left: 0;             /* quita sangría interna */
+  margin-left: 0;              /* quita margen lateral */
+  list-style-position: inside; /* números pegados al texto */
+}
+
+details.fold .how-steps li {
+  margin: .25rem 0;            /* espacio compacto entre líneas */
+  line-height: 1.5;            /* altura cómoda */
+}
+
+details.fold .how-steps li::marker {
+  font-weight: 700;            /* marca más visible */
+  color: var(--gold);          /* color dorado del número */
+}
+
   </style>
 </head>
 <body>
